@@ -1,0 +1,6 @@
+{
+	"variants": { 
+		"powered=true": { "model": "mcio:block/gpio" },
+		"powered=false": { "model": "mcio:block/gpio" }
+	} 
+}
