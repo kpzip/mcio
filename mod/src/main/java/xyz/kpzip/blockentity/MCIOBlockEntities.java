@@ -18,4 +18,6 @@ public class MCIOBlockEntities {
 		return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, id, blockEntityType);
 	}
 	
+	public static void init() {}
+	
 }
