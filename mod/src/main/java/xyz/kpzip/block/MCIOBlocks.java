@@ -22,7 +22,7 @@ import xyz.kpzip.MCIO;
 public class MCIOBlocks {
 	
 	
-	public static final Block GPIO_Block = register("gpio", GPIO::new, BlockBehaviour.Properties.of().strength(4.0f));
+	public static final Block GPIO_BLOCK = register("gpio", GPIO::new, BlockBehaviour.Properties.of().strength(4.0f));
 	
 	
 	

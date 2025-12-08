@@ -7,12 +7,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.redstone.Orientation;
 import xyz.kpzip.MCIO;
+import xyz.kpzip.blockentity.GPIOBlockEntity;
 import xyz.kpzip.serial.SerialConnections;
 
 /**
@@ -20,7 +23,7 @@ import xyz.kpzip.serial.SerialConnections;
  * @author kpzip
  * 
  */
-public class GPIO extends Block {
+public class GPIO extends Block implements EntityBlock {
 	
 	static final BooleanProperty POWERED = BooleanProperty.create("powered");
 
@@ -59,10 +62,17 @@ public class GPIO extends Block {
 		}
 	}
 	
+	@Override
+	public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+		return new GPIOBlockEntity(blockPos, blockState);
+	}
+
+	
 	private void updateGPIOState(boolean state) {
 		MCIO.LOGGER.info("GPIO Toggled " + (state ? "on" : "off"));
 		SerialConnections.sendData(state ? new byte[] {1} : new byte[] {0});
 	}
+	
 	
 	
 
