@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.MinecraftServer;
 import xyz.kpzip.block.MCIOBlocks;
 import xyz.kpzip.blockentity.MCIOBlockEntities;
+import xyz.kpzip.screen.MCIOScreens;
 import xyz.kpzip.serial.SerialConnections;
 
 public class MCIO implements ModInitializer, ServerLifecycleEvents.ServerStopped {
@@ -29,8 +30,11 @@ public class MCIO implements ModInitializer, ServerLifecycleEvents.ServerStopped
 		LOGGER.info("MCIO Loaded.");
 		MCIOBlocks.init();
 		MCIOBlockEntities.init();
+		MCIOScreens.init();
+		
 		ServerLifecycleEvents.SERVER_STOPPED.register(this);
-		// TODO make this server side only
+		
+		// TODO should only happen if the block is opened
 		SerialConnections.init();
 		
 	}

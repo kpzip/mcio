@@ -8,6 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import xyz.kpzip.screen.handler.GPIOScreenHandler;
 
 public class GPIOBlockEntity extends BlockEntity implements MenuProvider {
 
@@ -17,8 +18,7 @@ public class GPIOBlockEntity extends BlockEntity implements MenuProvider {
 
 	@Override
 	public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-		// TODO Auto-generated method stub
-		return null;
+		return new GPIOScreenHandler(i, inventory);
 	}
 
 	@Override

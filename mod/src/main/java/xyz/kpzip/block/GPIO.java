@@ -3,17 +3,25 @@
  */
 package xyz.kpzip.block;
 
+import com.mojang.serialization.MapCodec;
+
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.redstone.Orientation;
+import net.minecraft.world.phys.BlockHitResult;
 import xyz.kpzip.MCIO;
 import xyz.kpzip.blockentity.GPIOBlockEntity;
 import xyz.kpzip.serial.SerialConnections;
@@ -23,7 +31,7 @@ import xyz.kpzip.serial.SerialConnections;
  * @author kpzip
  * 
  */
-public class GPIO extends Block implements EntityBlock {
+public class GPIO extends BaseEntityBlock {
 	
 	static final BooleanProperty POWERED = BooleanProperty.create("powered");
 
@@ -66,11 +74,31 @@ public class GPIO extends Block implements EntityBlock {
 	public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
 		return new GPIOBlockEntity(blockPos, blockState);
 	}
+	
+	@Override
+	protected InteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+		if (!level.isClientSide()) {
+			MenuProvider provider = blockState.getMenuProvider(level, blockPos);
+			
+			if (provider != null) {
+				player.openMenu(provider);
+			}
+			else {
+				MCIO.LOGGER.info("Provider was Null!");
+			}
+		}
+		return InteractionResult.SUCCESS;
+	}
 
 	
 	private void updateGPIOState(boolean state) {
 		MCIO.LOGGER.info("GPIO Toggled " + (state ? "on" : "off"));
 		SerialConnections.sendData(state ? new byte[] {1} : new byte[] {0});
+	}
+
+	@Override
+	protected MapCodec<? extends BaseEntityBlock> codec() {
+		return simpleCodec(GPIO::new);
 	}
 	
 	
