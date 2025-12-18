@@ -47,7 +47,7 @@ processResources {
 	inputs.property "version", project.version
 
 	filesMatching("fabric.mod.json") {
-		expand "version": inputs.properties.mod_version
+		expand "version": inputs.properties.version
 	}
 }
 
