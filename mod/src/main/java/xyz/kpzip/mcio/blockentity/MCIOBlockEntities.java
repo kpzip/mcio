@@ -1,12 +1,12 @@
-package xyz.kpzip.blockentity;
+package xyz.kpzip.mcio.blockentity;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import xyz.kpzip.MCIO;
-import xyz.kpzip.block.MCIOBlocks;
+import xyz.kpzip.mcio.MCIO;
+import xyz.kpzip.mcio.block.MCIOBlocks;
 
 public class MCIOBlockEntities {
 	

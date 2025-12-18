@@ -1,4 +1,4 @@
-package xyz.kpzip.blockentity;
+package xyz.kpzip.mcio.blockentity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -8,7 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import xyz.kpzip.screen.handler.GPIOScreenHandler;
+import xyz.kpzip.mcio.screen.handler.GPIOScreenHandler;
 
 public class GPIOBlockEntity extends BlockEntity implements MenuProvider {
 
@@ -26,6 +26,8 @@ public class GPIOBlockEntity extends BlockEntity implements MenuProvider {
 		
 		return Component.translatable(getBlockState().getBlock().getDescriptionId());
 	}
+	
+	
 	
 	
 	

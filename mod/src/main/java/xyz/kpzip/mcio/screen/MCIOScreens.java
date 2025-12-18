@@ -1,15 +1,15 @@
 /**
  * 
  */
-package xyz.kpzip.screen;
+package xyz.kpzip.mcio.screen;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
-import xyz.kpzip.MCIO;
-import xyz.kpzip.screen.handler.GPIOScreenHandler;
+import xyz.kpzip.mcio.MCIO;
+import xyz.kpzip.mcio.screen.handler.GPIOScreenHandler;
 
 /**
  * 

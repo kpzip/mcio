@@ -1,7 +1,9 @@
 /**
  * 
  */
-package xyz.kpzip.block;
+package xyz.kpzip.mcio.block;
+
+import java.util.OptionalInt;
 
 import com.mojang.serialization.MapCodec;
 
@@ -22,9 +24,9 @@ import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
-import xyz.kpzip.MCIO;
-import xyz.kpzip.blockentity.GPIOBlockEntity;
-import xyz.kpzip.serial.SerialConnections;
+import xyz.kpzip.mcio.MCIO;
+import xyz.kpzip.mcio.blockentity.GPIOBlockEntity;
+import xyz.kpzip.mcio.serial.SerialConnections;
 
 /**
  * 
@@ -81,7 +83,8 @@ public class GPIO extends BaseEntityBlock {
 			MenuProvider provider = blockState.getMenuProvider(level, blockPos);
 			
 			if (provider != null) {
-				player.openMenu(provider);
+				OptionalInt i = player.openMenu(provider);
+				MCIO.LOGGER.info("Server screen creation status: " + i.toString());
 			}
 			else {
 				MCIO.LOGGER.info("Provider was Null!");

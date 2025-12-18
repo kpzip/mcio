@@ -1,4 +1,4 @@
-package xyz.kpzip.mixin;
+package xyz.kpzip.mcio.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 

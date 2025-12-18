@@ -1,7 +1,7 @@
 /**
  * 
  */
-package xyz.kpzip.block;
+package xyz.kpzip.mcio.block;
 
 import java.util.function.Function;
 
@@ -12,7 +12,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import xyz.kpzip.MCIO;
+import xyz.kpzip.mcio.MCIO;
 
 /**
  * 

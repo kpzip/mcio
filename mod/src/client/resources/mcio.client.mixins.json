@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "xyz.kpzip.mixin.client",
+	"package": "xyz.kpzip.mcio.mixin.client",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
 		"ExampleClientMixin"

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package xyz.kpzip.serial;
+package xyz.kpzip.mcio.serial;
 
 import java.nio.charset.StandardCharsets;
 
@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 import com.fazecast.jSerialComm.SerialPort;
 
-import xyz.kpzip.MCIO;
+import xyz.kpzip.mcio.MCIO;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package xyz.kpzip;
+package xyz.kpzip.mcio;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,10 +6,10 @@ import org.slf4j.LoggerFactory;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.MinecraftServer;
-import xyz.kpzip.block.MCIOBlocks;
-import xyz.kpzip.blockentity.MCIOBlockEntities;
-import xyz.kpzip.screen.MCIOScreens;
-import xyz.kpzip.serial.SerialConnections;
+import xyz.kpzip.mcio.block.MCIOBlocks;
+import xyz.kpzip.mcio.blockentity.MCIOBlockEntities;
+import xyz.kpzip.mcio.screen.MCIOScreens;
+import xyz.kpzip.mcio.serial.SerialConnections;
 
 public class MCIO implements ModInitializer, ServerLifecycleEvents.ServerStopped {
 	
