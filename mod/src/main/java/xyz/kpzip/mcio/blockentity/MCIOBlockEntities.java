@@ -11,6 +11,7 @@ import xyz.kpzip.mcio.block.MCIOBlocks;
 public class MCIOBlockEntities {
 	
 	public static final BlockEntityType<GPIOBlockEntity> GPIO_BLOCK_ENTITY = register("gpio", FabricBlockEntityTypeBuilder.create(GPIOBlockEntity::new, MCIOBlocks.GPIO_BLOCK).build());
+	public static final BlockEntityType<MCUInterfaceBlockEntity> MCU_INTERFACE_BLOCK_ENTITY = register("mcu_interface", FabricBlockEntityTypeBuilder.create(MCUInterfaceBlockEntity::new, MCIOBlocks.MCU_INTERFACE_BLOCK).build());
 	
 	
 	public static <T extends BlockEntityType<?>> T register(String path, T blockEntityType) {

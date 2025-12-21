@@ -1,3 +1,4 @@
 { 
-	"block.mcio.gpio": "General Purpose I/O"
+	"block.mcio.gpio": "General Purpose I/O",
+	"block.mcio.mcu_interface": "Microcontroller Interface"
 }

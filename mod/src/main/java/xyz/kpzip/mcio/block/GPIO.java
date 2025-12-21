@@ -26,7 +26,6 @@ import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
 import xyz.kpzip.mcio.MCIO;
 import xyz.kpzip.mcio.blockentity.GPIOBlockEntity;
-import xyz.kpzip.mcio.serial.SerialConnections;
 
 /**
  * 
@@ -96,7 +95,7 @@ public class GPIO extends BaseEntityBlock {
 	
 	private void updateGPIOState(boolean state) {
 		MCIO.LOGGER.info("GPIO Toggled " + (state ? "on" : "off"));
-		SerialConnections.sendData(state ? new byte[] {1} : new byte[] {0});
+//		SerialCommunication.sendData(state ? new byte[] {1} : new byte[] {0});
 	}
 
 	@Override

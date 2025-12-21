@@ -1,6 +1,7 @@
 {
 	"replace": false,
 	"values": [
-		"mcio:gpio"
+		"mcio:gpio",
+		"mcio:mcu_interface"
 	]
 }

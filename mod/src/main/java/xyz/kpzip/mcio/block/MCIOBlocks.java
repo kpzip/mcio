@@ -23,6 +23,7 @@ public class MCIOBlocks {
 	
 	
 	public static final Block GPIO_BLOCK = register("gpio", GPIO::new, BlockBehaviour.Properties.of().strength(4.0f));
+	public static final Block MCU_INTERFACE_BLOCK = register("mcu_interface", MCUInterface::new, BlockBehaviour.Properties.of().strength(4.0f));
 	
 	
 	

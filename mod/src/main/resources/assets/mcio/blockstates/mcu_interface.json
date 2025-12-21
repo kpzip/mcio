@@ -1,0 +1,5 @@
+{
+	"variants": { 
+		"": { "model": "mcio:block/mcu_interface" }
+	} 
+}

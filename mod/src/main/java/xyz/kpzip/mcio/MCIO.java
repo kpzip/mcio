@@ -8,8 +8,8 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.MinecraftServer;
 import xyz.kpzip.mcio.block.MCIOBlocks;
 import xyz.kpzip.mcio.blockentity.MCIOBlockEntities;
+import xyz.kpzip.mcio.communications.SerialCommunication;
 import xyz.kpzip.mcio.screen.MCIOScreens;
-import xyz.kpzip.mcio.serial.SerialConnections;
 
 public class MCIO implements ModInitializer, ServerLifecycleEvents.ServerStopped {
 	
@@ -35,18 +35,14 @@ public class MCIO implements ModInitializer, ServerLifecycleEvents.ServerStopped
 		ServerLifecycleEvents.SERVER_STOPPED.register(this);
 		
 		// TODO should only happen if the block is opened
-		SerialConnections.init();
+		SerialCommunication.init();
 		
 	}
 
 	@Override
 	public void onServerStopped(MinecraftServer server) {
 		
-		if (SerialConnections.currentPort != null) {
-			LOGGER.info("Closing Serial Connection...");
-			SerialConnections.currentPort.closePort();
-			SerialConnections.currentPort = null;
-		}
+		SerialCommunication.close();
 		
 	}
 }
