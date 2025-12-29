@@ -34,7 +34,7 @@ import xyz.kpzip.mcio.blockentity.GPIOBlockEntity;
  */
 public class GPIO extends BaseEntityBlock {
 	
-	static final BooleanProperty POWERED = BooleanProperty.create("powered");
+	public static final BooleanProperty POWERED = BooleanProperty.create("powered");
 
 	public GPIO(BlockBehaviour.Properties properties) {
 		super(properties);

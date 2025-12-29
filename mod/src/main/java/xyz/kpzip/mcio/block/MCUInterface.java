@@ -3,8 +3,6 @@
  */
 package xyz.kpzip.mcio.block;
 
-import java.util.OptionalInt;
-
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
@@ -19,7 +17,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import xyz.kpzip.mcio.MCIO;
 import xyz.kpzip.mcio.blockentity.MCUInterfaceBlockEntity;
 
 /**

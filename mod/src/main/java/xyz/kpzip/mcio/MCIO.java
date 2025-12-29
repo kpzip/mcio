@@ -9,6 +9,7 @@ import net.minecraft.server.MinecraftServer;
 import xyz.kpzip.mcio.block.MCIOBlocks;
 import xyz.kpzip.mcio.blockentity.MCIOBlockEntities;
 import xyz.kpzip.mcio.communications.SerialCommunication;
+import xyz.kpzip.mcio.item.MCIOItems;
 import xyz.kpzip.mcio.screen.MCIOScreens;
 
 public class MCIO implements ModInitializer, ServerLifecycleEvents.ServerStopped {
@@ -29,6 +30,7 @@ public class MCIO implements ModInitializer, ServerLifecycleEvents.ServerStopped
 
 		LOGGER.info("MCIO Loaded.");
 		MCIOBlocks.init();
+		MCIOItems.init();
 		MCIOBlockEntities.init();
 		MCIOScreens.init();
 		
