@@ -1,4 +1,4 @@
-package xyz.kpzip.mcio.block;
+package xyz.kpzip.mcio.block.perhipheral;
 
 import java.util.function.Function;
 
@@ -13,14 +13,14 @@ import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
-public abstract class PrehipheralBlock<T extends Enum<T> & StringRepresentable> extends BaseEntityBlock {
+public abstract class PerhipheralBlock<T extends Enum<T> & StringRepresentable> extends BaseEntityBlock {
 	
 	public static final BooleanProperty POWERED = BooleanProperty.create("powered");
 	public final EnumProperty<T> PART;
 	
-	private Function<Properties, ? extends PrehipheralBlock<T>> super_constructor;
+	private Function<Properties, ? extends PerhipheralBlock<T>> super_constructor;
 
-	public PrehipheralBlock(Properties properties, T def, Class<T> tclazz, Function<Properties, ? extends PrehipheralBlock<T>> super_constructor) {
+	public PerhipheralBlock(Properties properties, T def, Class<T> tclazz, Function<Properties, ? extends PerhipheralBlock<T>> super_constructor) {
 		super(properties);
 		PART = EnumProperty.create("part", tclazz);
 		this.super_constructor = super_constructor;

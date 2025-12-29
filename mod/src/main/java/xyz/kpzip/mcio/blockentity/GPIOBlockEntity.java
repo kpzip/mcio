@@ -23,16 +23,7 @@ public class GPIOBlockEntity extends BlockEntity implements MenuProvider {
 
 	@Override
 	public Component getDisplayName() {
-		
 		return Component.translatable(getBlockState().getBlock().getDescriptionId());
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

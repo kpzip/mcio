@@ -1,19 +1,17 @@
-package xyz.kpzip.mcio.block.state;
+package xyz.kpzip.mcio.block.perhipheral.state;
 
 import net.minecraft.util.StringRepresentable;
 
-public enum SPIBlockStates implements StringRepresentable {
+public enum I2CBlockStates  implements StringRepresentable {
 	SINGLE("single"),
 	CONTROLLER("controller"),
-	SCK("sck"),
-	MISO("miso"),
-	MOSI("mosi"),
-	CS("cs");
+	SDA("sda"),
+	SCL("scl");
 	
 	
 	String name;
 	
-	private SPIBlockStates(String name) {
+	private I2CBlockStates(String name) {
 		this.name = name;
 	}
 
@@ -21,7 +19,5 @@ public enum SPIBlockStates implements StringRepresentable {
 	public String getSerializedName() {
 		return this.name;
 	}
-	
-	
 
 }
