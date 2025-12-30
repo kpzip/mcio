@@ -10,6 +10,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
 public class WrenchInfoComponent {
@@ -21,7 +22,8 @@ public class WrenchInfoComponent {
 					BlockPos.CODEC.fieldOf("selected_controller").forGetter(WrenchInfoComponent::getSelectedController)
 				)
 				.apply(instance, WrenchInfoComponent::new));
-	public static final StreamCodec<RegistryFriendlyByteBuf, WrenchInfoComponent> STREAM_CODEC = null;
+	public static final StreamCodec<RegistryFriendlyByteBuf, WrenchInfoComponent> STREAM_CODEC = StreamCodec.composite(
+			BlockPos.STREAM_CODEC.apply(ByteBufCodecs.list()), WrenchInfoComponent::getSelectedBlocks, BlockPos.STREAM_CODEC, WrenchInfoComponent::getSelectedController, WrenchInfoComponent::new);
 	@Nullable
 	private BlockPos selectedController = null;
 	

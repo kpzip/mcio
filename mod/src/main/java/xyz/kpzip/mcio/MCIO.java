@@ -10,6 +10,7 @@ import xyz.kpzip.mcio.block.MCIOBlocks;
 import xyz.kpzip.mcio.blockentity.MCIOBlockEntities;
 import xyz.kpzip.mcio.communications.SerialCommunication;
 import xyz.kpzip.mcio.item.MCIOItems;
+import xyz.kpzip.mcio.item.component.MCIOComponents;
 import xyz.kpzip.mcio.screen.MCIOScreens;
 
 public class MCIO implements ModInitializer, ServerLifecycleEvents.ServerStopped {
@@ -29,10 +30,13 @@ public class MCIO implements ModInitializer, ServerLifecycleEvents.ServerStopped
 		// Proceed with mild caution.
 
 		LOGGER.info("MCIO Loaded.");
+		
+		// Static load a bunch of classes
 		MCIOBlocks.init();
 		MCIOItems.init();
 		MCIOBlockEntities.init();
 		MCIOScreens.init();
+		MCIOComponents.init();
 		
 		ServerLifecycleEvents.SERVER_STOPPED.register(this);
 		

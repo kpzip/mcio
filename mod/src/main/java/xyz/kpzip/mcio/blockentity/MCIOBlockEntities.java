@@ -8,11 +8,14 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import xyz.kpzip.mcio.MCIO;
 import xyz.kpzip.mcio.block.MCIOBlocks;
 import xyz.kpzip.mcio.blockentity.perhipheral.I2CBlockEntity;
+import xyz.kpzip.mcio.blockentity.perhipheral.component.PerhipheralInputComponentBlockEntity;
 
 public class MCIOBlockEntities {
 	
 	public static final BlockEntityType<GPIOBlockEntity> GPIO_BLOCK_ENTITY = register("gpio", FabricBlockEntityTypeBuilder.create(GPIOBlockEntity::new, MCIOBlocks.GPIO_BLOCK).build());
 	public static final BlockEntityType<MCUInterfaceBlockEntity> MCU_INTERFACE_BLOCK_ENTITY = register("mcu_interface", FabricBlockEntityTypeBuilder.create(MCUInterfaceBlockEntity::new, MCIOBlocks.MCU_INTERFACE_BLOCK).build());
+	
+	public static final BlockEntityType<PerhipheralInputComponentBlockEntity> PERHIPHERAL_INPUT_BLOCK_ENTITY = register("perhipheral_input", FabricBlockEntityTypeBuilder.create(PerhipheralInputComponentBlockEntity::new, MCIOBlocks.PERHIPHERAL_INPUT).build());
 	
 	// Prehipherals
 	public static final BlockEntityType<I2CBlockEntity> I2C_PERHIPHERAL_BLOCK_ENTITY = register("i2c_perhipheral", FabricBlockEntityTypeBuilder.create(I2CBlockEntity::new, MCIOBlocks.I2C_PERHIPHERAL_BLOCK).build());
