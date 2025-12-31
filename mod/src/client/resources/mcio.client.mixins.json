@@ -3,7 +3,8 @@
 	"package": "xyz.kpzip.mcio.mixin.client",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-		"ExampleClientMixin"
+		"ModelLayersAccessor",
+		"LayerDefinitionsMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

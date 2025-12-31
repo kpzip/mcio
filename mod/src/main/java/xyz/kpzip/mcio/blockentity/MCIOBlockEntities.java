@@ -17,7 +17,7 @@ public class MCIOBlockEntities {
 	
 	public static final BlockEntityType<PerhipheralInputComponentBlockEntity> PERHIPHERAL_INPUT_BLOCK_ENTITY = register("perhipheral_input", FabricBlockEntityTypeBuilder.create(PerhipheralInputComponentBlockEntity::new, MCIOBlocks.PERHIPHERAL_INPUT).build());
 	
-	// Prehipherals
+	// Perhipherals
 	public static final BlockEntityType<I2CBlockEntity> I2C_PERHIPHERAL_BLOCK_ENTITY = register("i2c_perhipheral", FabricBlockEntityTypeBuilder.create(I2CBlockEntity::new, MCIOBlocks.I2C_PERHIPHERAL_BLOCK).build());
 	
 	

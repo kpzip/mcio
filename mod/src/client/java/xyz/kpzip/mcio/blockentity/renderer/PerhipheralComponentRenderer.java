@@ -7,7 +7,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;
@@ -25,6 +24,7 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.ItemStack;
 import xyz.kpzip.mcio.MCIO;
 import xyz.kpzip.mcio.blockentity.perhipheral.component.PerhipheralComponentBlockEntity;
+import xyz.kpzip.mcio.blockentity.renderer.model.MCIOModelLayers;
 import xyz.kpzip.mcio.blockentity.renderer.model.PerhipheralComponentModel;
 import xyz.kpzip.mcio.blockentity.renderer.state.PerhipheralComponentRendererState;
 import xyz.kpzip.mcio.item.MCIOItems;
@@ -38,7 +38,7 @@ public class PerhipheralComponentRenderer<T extends PerhipheralComponentBlockEnt
 	
 	public PerhipheralComponentRenderer(BlockEntityRendererProvider.Context ctx) {
 		this.ctx = ctx;
-		this.model = new PerhipheralComponentModel(ctx.bakeLayer(ModelLayers.ENDERMAN));
+		this.model = new PerhipheralComponentModel(ctx.bakeLayer(MCIOModelLayers.WRENCH_SELECT_OVERLAY));
 	}
 	
 	@Override
@@ -56,8 +56,10 @@ public class PerhipheralComponentRenderer<T extends PerhipheralComponentBlockEnt
 		
 		String text = "miso";
 		float width = ctx.font().width(text);
+		MCIO.LOGGER.debug("Checking for wrench...");
 		
 		if (lh.getItem() == MCIOItems.WRENCH || rh.getItem() == MCIOItems.WRENCH) {
+			MCIO.LOGGER.debug("Rendering Overlay...");
 			poseStack.pushPose();
 			poseStack.translate(0.5, 1, 0.5);
 			poseStack.mulPose(Axis.XP.rotationDegrees(90));
