@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "mcio",
+	"version": "${version}",
+	"name": "Minecraft I/O",
+	"description": "Interface redstone with electronics!",
+	"authors": [
+		"Kyle 'kpzip' Schmerge"
+	],
+	"contact": {
+		"homepage": "https://github.com/kpzip/mcio",
+		"sources": "https://github.com/kpzip/mcio"
+	},
+	"license": "GPL-3.0",
+	"icon": "assets/mcio/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"xyz.kpzip.mcio.MCIO"
+		],
+		"client": [
+			"xyz.kpzip.mcio.MCIOClient"
+		]
+	},
+	"mixins": [
+		"mcio.mixins.json",
+		{
+			"config": "mcio.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.18.2",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+	}
+}

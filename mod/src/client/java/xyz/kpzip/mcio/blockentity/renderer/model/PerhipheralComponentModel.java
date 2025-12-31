@@ -8,7 +8,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 
 
 @Environment(EnvType.CLIENT)
@@ -16,11 +16,11 @@ public class PerhipheralComponentModel extends Model<PerhipheralComponentModel.S
 	
 	public static final String BLOCK_BODY = "block_body";
 	
-	private final ModelPart body;
+	//private final ModelPart body;
 	
 	public PerhipheralComponentModel(ModelPart modelPart) {
-		super(modelPart, RenderType::entitySolid);
-		this.body = modelPart.getChild(BLOCK_BODY);
+		super(modelPart, RenderTypes::entitySolid);
+		//this.body = modelPart.getChild(BLOCK_BODY);
 	}
 	
 	public static LayerDefinition createBodyLayer() {

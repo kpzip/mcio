@@ -7,25 +7,25 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
-import xyz.kpzip.mcio.screen.handler.MCUInterfaceScreenHandler;
+import xyz.kpzip.mcio.screen.handler.GPIOScreenHandler;
 
 /**
  * 
  * @author kpzip
  * 
  */
-public class MCUInterfaceScreen extends AbstractContainerScreen<MCUInterfaceScreenHandler> {
+public class GPIOScreen extends AbstractContainerScreen<GPIOScreenHandler> {
 	
-	private static final ResourceLocation TEXTURE = ResourceLocation.withDefaultNamespace("textures/gui/container/dispenser.png");
+	private static final Identifier TEXTURE = Identifier.withDefaultNamespace("textures/gui/container/dispenser.png");
 	
 	/**
 	 * @param abstractContainerMenu
 	 * @param inventory
 	 * @param component
 	 */
-	public MCUInterfaceScreen(MCUInterfaceScreenHandler abstractContainerMenu, Inventory inventory, Component component) {
+	public GPIOScreen(GPIOScreenHandler abstractContainerMenu, Inventory inventory, Component component) {
 		super(abstractContainerMenu, inventory, component);
 	}
 

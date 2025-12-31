@@ -3,7 +3,7 @@ package xyz.kpzip.mcio.blockentity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import xyz.kpzip.mcio.MCIO;
 import xyz.kpzip.mcio.block.MCIOBlocks;
@@ -22,7 +22,7 @@ public class MCIOBlockEntities {
 	
 	
 	public static <T extends BlockEntityType<?>> T register(String path, T blockEntityType) {
-		final ResourceLocation id = ResourceLocation.tryBuild(MCIO.MOD_ID, path);
+		final Identifier id = Identifier.tryBuild(MCIO.MOD_ID, path);
 		return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, id, blockEntityType);
 	}
 	

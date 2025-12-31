@@ -6,8 +6,8 @@ package xyz.kpzip.mcio.block;
 import java.util.function.Function;
 
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -31,11 +31,11 @@ public class MCIOBlocks {
 	public static final Block PERHIPHERAL_INPUT = register("perhipheral_input", PerhipheralInput::new, BlockBehaviour.Properties.of().strength(4.0f))
 ;	
 	// Perhipherals
-	public static final Block I2C_PERHIPHERAL_BLOCK = register("mcu_interface", I2C::new, BlockBehaviour.Properties.of().strength(4.0f));
+	public static final Block I2C_PERHIPHERAL_BLOCK = register("i2c", I2C::new, BlockBehaviour.Properties.of().strength(4.0f));
 	
 	
 	private static Block register(String path, Function<BlockBehaviour.Properties, Block> factory, BlockBehaviour.Properties settings) {
-	    final ResourceLocation identifier = ResourceLocation.tryBuild(MCIO.MOD_ID, path);
+	    final Identifier identifier = Identifier.tryBuild(MCIO.MOD_ID, path);
 	    final ResourceKey<Block> registryKey = ResourceKey.create(Registries.BLOCK, identifier);
 
 	    final Block block = Blocks.register(registryKey, factory, settings);

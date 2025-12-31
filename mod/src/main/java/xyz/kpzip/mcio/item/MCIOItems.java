@@ -3,8 +3,8 @@ package xyz.kpzip.mcio.item;
 import java.util.function.Function;
 
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import xyz.kpzip.mcio.MCIO;
@@ -17,7 +17,7 @@ public class MCIOItems {
 	
 	
 	private static Item register(String path, Function<Item.Properties, Item> factory, Item.Properties settings) {
-	    final ResourceLocation identifier = ResourceLocation.tryBuild(MCIO.MOD_ID, path);
+	    final Identifier identifier = Identifier.tryBuild(MCIO.MOD_ID, path);
 	    final ResourceKey<Item> registryKey = ResourceKey.create(Registries.ITEM, identifier);
 
 	    final Item block = Items.registerItem(registryKey, factory, settings);
