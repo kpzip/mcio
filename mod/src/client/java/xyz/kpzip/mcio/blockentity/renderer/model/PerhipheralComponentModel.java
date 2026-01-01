@@ -29,7 +29,7 @@ public class PerhipheralComponentModel extends Model<PerhipheralComponentModel.S
 				BLOCK_BODY, CubeListBuilder.create().texOffs(0, 0).addBox(-8.0f, -8.0f, -8.0f, 16.0f, 16.0f, 16.0f), 
 				PartPose.offset(0, 0, 0)
 		);
-		return LayerDefinition.create(meshDefinition, 16, 16);
+		return LayerDefinition.create(meshDefinition, 64, 64);
 	}
 
 	

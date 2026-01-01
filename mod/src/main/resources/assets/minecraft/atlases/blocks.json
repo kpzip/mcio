@@ -1,0 +1,8 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "mcio:entity/overlay/wrench_selection_overlay"
+    }
+  ]
+}

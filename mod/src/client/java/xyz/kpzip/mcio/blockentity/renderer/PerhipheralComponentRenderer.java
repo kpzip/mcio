@@ -20,7 +20,7 @@ import net.minecraft.client.resources.model.Material;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import xyz.kpzip.mcio.MCIO;
 import xyz.kpzip.mcio.blockentity.perhipheral.component.PerhipheralComponentBlockEntity;
@@ -50,28 +50,30 @@ public class PerhipheralComponentRenderer<T extends PerhipheralComponentBlockEnt
 	public void submit(PerhipheralComponentRendererState blockEntityRenderState, PoseStack poseStack,
 			SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
 		LocalPlayer p = Minecraft.getInstance().player;
-		ItemStack lh = p.getItemHeldByArm(HumanoidArm.LEFT);
-		ItemStack rh = p.getItemHeldByArm(HumanoidArm.RIGHT);
+//		ItemStack lh = p.getItemHeldByArm(HumanoidArm.LEFT);
+//		ItemStack rh = p.getItemHeldByArm(HumanoidArm.RIGHT);
 		ItemStack mh = p.getMainHandItem();
 		
 		String text = "miso";
 		float width = ctx.font().width(text);
-		MCIO.LOGGER.debug("Checking for wrench...");
 		
-		if (lh.getItem() == MCIOItems.WRENCH || rh.getItem() == MCIOItems.WRENCH) {
-			MCIO.LOGGER.debug("Rendering Overlay...");
+		if (mh.getItem() == MCIOItems.WRENCH) {
 			poseStack.pushPose();
-			poseStack.translate(0.5, 1, 0.5);
-			poseStack.mulPose(Axis.XP.rotationDegrees(90));
+			poseStack.translate(0.5, 0.5, 0.5);
 			PerhipheralComponentModel.State state = new PerhipheralComponentModel.State();
-			RenderType renderType = OVERLAY_RESOURCE_LOCATION.renderType(RenderTypes::entitySolid);
-			submitNodeCollector.submitModel(model, state, poseStack, renderType, blockEntityRenderState.lightCoords,
+			RenderType renderType = OVERLAY_RESOURCE_LOCATION.renderType(RenderTypes::armorTranslucent);
+			submitNodeCollector.submitModel(model, state, poseStack, renderType, 255,
 					OverlayTexture.NO_OVERLAY,
-					-1,
+					DyeColor.LIME.getTextureDiffuseColor(),
 					this.ctx.materials().get(OVERLAY_RESOURCE_LOCATION),
 					0,
-					blockEntityRenderState.breakProgress);
+					null);
+			
+			poseStack.popPose();
+			poseStack.pushPose();
 			float text_scale = 1/18f * 1/4;
+			poseStack.translate(0.5, 1, 0.5);
+			poseStack.mulPose(Axis.XP.rotationDegrees(90));
 			poseStack.scale(text_scale, text_scale, text_scale);
 			submitNodeCollector.submitText(poseStack, -width/2, -4.0f, FormattedCharSequence.forward(text, Style.EMPTY), false, Font.DisplayMode.SEE_THROUGH,
 					blockEntityRenderState.lightCoords,
