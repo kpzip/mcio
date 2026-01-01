@@ -3,13 +3,13 @@ package xyz.kpzip.mcio.blockentity.perhipheral;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import xyz.kpzip.mcio.blockentity.perhipheral.component.PerhipheralComponentBlockEntity;
 
-public abstract class PerhipheralBlockEntity extends BlockEntity implements MenuProvider{
+public abstract class PerhipheralBlockEntity extends PerhipheralComponentBlockEntity implements MenuProvider {
 
-	public PerhipheralBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
+	public PerhipheralBlockEntity(BlockEntityType<? extends PerhipheralComponentBlockEntity> blockEntityType, BlockPos blockPos, BlockState blockState) {
 		super(blockEntityType, blockPos, blockState);
 	}
 	

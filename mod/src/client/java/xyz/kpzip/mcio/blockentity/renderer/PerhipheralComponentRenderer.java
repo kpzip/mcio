@@ -28,6 +28,8 @@ import xyz.kpzip.mcio.blockentity.renderer.model.MCIOModelLayers;
 import xyz.kpzip.mcio.blockentity.renderer.model.PerhipheralComponentModel;
 import xyz.kpzip.mcio.blockentity.renderer.state.PerhipheralComponentRendererState;
 import xyz.kpzip.mcio.item.MCIOItems;
+import xyz.kpzip.mcio.item.component.MCIOComponents;
+import xyz.kpzip.mcio.item.component.WrenchInfoComponent;
 
 @Environment(EnvType.CLIENT)
 public class PerhipheralComponentRenderer<T extends PerhipheralComponentBlockEntity> implements BlockEntityRenderer<T, PerhipheralComponentRendererState> {
@@ -53,18 +55,19 @@ public class PerhipheralComponentRenderer<T extends PerhipheralComponentBlockEnt
 //		ItemStack lh = p.getItemHeldByArm(HumanoidArm.LEFT);
 //		ItemStack rh = p.getItemHeldByArm(HumanoidArm.RIGHT);
 		ItemStack mh = p.getMainHandItem();
+		WrenchInfoComponent component = mh.get(MCIOComponents.WRENCH_DATA);
 		
 		String text = "miso";
 		float width = ctx.font().width(text);
 		
-		if (mh.getItem() == MCIOItems.WRENCH) {
+		if (component != null && (mh.getItem() == MCIOItems.WRENCH && (component.getSelectedBlocks().contains(blockEntityRenderState.blockPos)) || blockEntityRenderState.blockPos.equals(component.getSelectedController()))) {
 			poseStack.pushPose();
 			poseStack.translate(0.5, 0.5, 0.5);
 			PerhipheralComponentModel.State state = new PerhipheralComponentModel.State();
 			RenderType renderType = OVERLAY_RESOURCE_LOCATION.renderType(RenderTypes::armorTranslucent);
 			submitNodeCollector.submitModel(model, state, poseStack, renderType, 255,
 					OverlayTexture.NO_OVERLAY,
-					DyeColor.LIME.getTextureDiffuseColor(),
+					DyeColor.RED.getTextureDiffuseColor(),
 					this.ctx.materials().get(OVERLAY_RESOURCE_LOCATION),
 					0,
 					null);

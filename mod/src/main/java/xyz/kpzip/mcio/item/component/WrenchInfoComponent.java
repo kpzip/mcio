@@ -15,7 +15,6 @@ import net.minecraft.network.codec.StreamCodec;
 
 public class WrenchInfoComponent {
 	
-	private List<BlockPos> selectedBlocks = new ArrayList<BlockPos>();
 	public static final Codec<WrenchInfoComponent> CODEC = RecordCodecBuilder.create(
 			instance -> instance.group(
 					Codec.list(BlockPos.CODEC).fieldOf("selected_blocks").forGetter(WrenchInfoComponent::getSelectedBlocks),
@@ -24,11 +23,14 @@ public class WrenchInfoComponent {
 				.apply(instance, WrenchInfoComponent::new));
 	public static final StreamCodec<RegistryFriendlyByteBuf, WrenchInfoComponent> STREAM_CODEC = StreamCodec.composite(
 			BlockPos.STREAM_CODEC.apply(ByteBufCodecs.list()), WrenchInfoComponent::getSelectedBlocks, BlockPos.STREAM_CODEC, WrenchInfoComponent::getSelectedController, WrenchInfoComponent::new);
+	
+	
+	private final List<BlockPos> selectedBlocks;
 	@Nullable
-	private BlockPos selectedController = null;
+	private final BlockPos selectedController;
 	
 	public WrenchInfoComponent() {
-		
+		this(new ArrayList<BlockPos>(), null);
 	}
 	
 	public WrenchInfoComponent(List<BlockPos> selectedBlocks, BlockPos selectedController) {
@@ -36,13 +38,17 @@ public class WrenchInfoComponent {
 		this.selectedController = selectedController;
 	}
 	
-	public boolean canSelect(BlockPos pos) {
-		return selectedController == null || selectedController.distManhattan(pos) == 1 || 
-				selectedBlocks.stream().anyMatch((pos2) -> pos.distManhattan(pos2) == 1);
+	public WrenchInfoComponent(BlockPos selectedController) {
+		this(new ArrayList<BlockPos>(), selectedController);
 	}
 	
-	public void selectController(BlockPos pos) {
-		this.selectedController = pos;
+	public boolean canSelect(BlockPos pos) {
+		return selectedController != null && (selectedController.distManhattan(pos) == 1 || 
+				selectedBlocks.stream().anyMatch((pos2) -> pos.distManhattan(pos2) == 1));
+	}
+	
+	public boolean canSelectController(BlockPos pos) {
+		return selectedController == null;
 	}
 	
 	@Nullable

@@ -1,0 +1,5 @@
+{
+	"variants": { 
+		"part=single": { "model": "mcio:block/i2c_single" }
+	} 
+}
