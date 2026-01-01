@@ -1,10 +1,10 @@
 package xyz.kpzip.mcio.item.component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
@@ -30,7 +30,7 @@ public class WrenchInfoComponent {
 	private final BlockPos selectedController;
 	
 	public WrenchInfoComponent() {
-		this(new ArrayList<BlockPos>(), null);
+		this(null);
 	}
 	
 	public WrenchInfoComponent(List<BlockPos> selectedBlocks, BlockPos selectedController) {
@@ -39,7 +39,7 @@ public class WrenchInfoComponent {
 	}
 	
 	public WrenchInfoComponent(BlockPos selectedController) {
-		this(new ArrayList<BlockPos>(), selectedController);
+		this(ImmutableList.of(), selectedController);
 	}
 	
 	public boolean canSelect(BlockPos pos) {
@@ -49,6 +49,14 @@ public class WrenchInfoComponent {
 	
 	public boolean canSelectController(BlockPos pos) {
 		return selectedController == null;
+	}
+	
+	public boolean isSelected(BlockPos pos) {
+		return selectedBlocks.stream().anyMatch((pos2) -> pos.equals(pos2));
+	}
+	
+	public boolean isSelectedController(BlockPos pos) {
+		return selectedController != null && selectedController.equals(pos);
 	}
 	
 	@Nullable

@@ -1,5 +1,7 @@
 package xyz.kpzip.mcio.blockentity.renderer;
 
+import org.jspecify.annotations.Nullable;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 
@@ -12,6 +14,7 @@ import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer.CrumblingOverlay;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.CameraRenderState;
@@ -22,6 +25,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 import xyz.kpzip.mcio.MCIO;
 import xyz.kpzip.mcio.blockentity.perhipheral.component.PerhipheralComponentBlockEntity;
 import xyz.kpzip.mcio.blockentity.renderer.model.MCIOModelLayers;
@@ -47,6 +51,13 @@ public class PerhipheralComponentRenderer<T extends PerhipheralComponentBlockEnt
 	public PerhipheralComponentRendererState createRenderState() {
 		return new PerhipheralComponentRendererState();
 	}
+	
+	@Override
+	public void extractRenderState(T blockEntity, PerhipheralComponentRendererState blockEntityRenderState, float f,
+			Vec3 vec3, @Nullable CrumblingOverlay crumblingOverlay) {
+		BlockEntityRenderer.super.extractRenderState(blockEntity, blockEntityRenderState, f, vec3, crumblingOverlay);
+		blockEntityRenderState.setColorVal(blockEntity.getOutlineColor());
+	}
 
 	@Override
 	public void submit(PerhipheralComponentRendererState blockEntityRenderState, PoseStack poseStack,
@@ -67,7 +78,7 @@ public class PerhipheralComponentRenderer<T extends PerhipheralComponentBlockEnt
 			RenderType renderType = OVERLAY_RESOURCE_LOCATION.renderType(RenderTypes::armorTranslucent);
 			submitNodeCollector.submitModel(model, state, poseStack, renderType, 255,
 					OverlayTexture.NO_OVERLAY,
-					DyeColor.RED.getTextureDiffuseColor(),
+					blockEntityRenderState.getColorVal(),
 					this.ctx.materials().get(OVERLAY_RESOURCE_LOCATION),
 					0,
 					null);

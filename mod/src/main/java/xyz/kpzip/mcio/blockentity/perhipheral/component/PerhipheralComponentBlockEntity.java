@@ -10,5 +10,7 @@ public abstract class PerhipheralComponentBlockEntity extends BlockEntity {
 	public PerhipheralComponentBlockEntity(BlockEntityType<? extends PerhipheralComponentBlockEntity> blockEntityType, BlockPos blockPos, BlockState blockState) {
 		super(blockEntityType, blockPos, blockState);
 	}
+	
+	public abstract int getOutlineColor();
 
 }
