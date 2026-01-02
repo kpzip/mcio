@@ -23,7 +23,6 @@ import net.minecraft.client.resources.model.Material;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import xyz.kpzip.mcio.MCIO;
@@ -71,7 +70,7 @@ public class PerhipheralComponentRenderer<T extends PerhipheralComponentBlockEnt
 		String text = "miso";
 		float width = ctx.font().width(text);
 		
-		if (component != null && (mh.getItem() == MCIOItems.WRENCH && (component.getSelectedBlocks().contains(blockEntityRenderState.blockPos)) || blockEntityRenderState.blockPos.equals(component.getSelectedController()))) {
+		if (component != null && (mh.getItem() == MCIOItems.WRENCH && (component.getSelectedBlocks().stream().anyMatch((sel) -> sel.pos().equals(blockEntityRenderState.blockPos))) || blockEntityRenderState.blockPos.equals(component.getSelectedController().pos()))) {
 			poseStack.pushPose();
 			poseStack.translate(0.5, 0.5, 0.5);
 			PerhipheralComponentModel.State state = new PerhipheralComponentModel.State();
