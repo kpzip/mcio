@@ -2,6 +2,8 @@
 	"block.mcio.gpio": "General Purpose I/O",
 	"block.mcio.mcu_interface": "Microcontroller Interface",
 	"block.mcio.perhipheral_input": "Perhipheral Input Connector",
+	"block.mcio.perhipheral_output": "Perhipheral Output Connector",
+	"block.mcio.perhipheral_bidirect": "Perhipheral Bi-Directional Connector",
 	"block.mcio.i2c": "I^2C Interface",
 	"item.mcio.wrench": "Debug Probe"
 }

@@ -1,6 +1,9 @@
 package xyz.kpzip.mcio.block.perhipheral;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -8,6 +11,7 @@ import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import xyz.kpzip.mcio.block.perhipheral.state.I2CBlockStates;
 import xyz.kpzip.mcio.blockentity.perhipheral.I2CBlockEntity;
+import xyz.kpzip.mcio.item.component.WrenchInfoComponent;
 
 public class I2C extends PerhipheralBlock<I2CBlockStates> {
 	
@@ -27,6 +31,12 @@ public class I2C extends PerhipheralBlock<I2CBlockStates> {
 	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
 		super.createBlockStateDefinition(builder);
 		builder.add(PART);
+	}
+	
+	@Override
+	public boolean canSelect(BlockPos pos, BlockState state, Level level, Player player, WrenchInfoComponent component,
+			ItemStack wrenchStack) {
+		return PerhipheralBlock.wrenchSelectionHelper(pos, state, level, player, component, wrenchStack, 0, 0, 2);
 	}
 
 }

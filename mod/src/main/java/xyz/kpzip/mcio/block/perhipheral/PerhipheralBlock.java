@@ -1,5 +1,6 @@
 package xyz.kpzip.mcio.block.perhipheral;
 
+import java.util.List;
 import java.util.function.Function;
 
 import com.mojang.serialization.MapCodec;
@@ -18,6 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import xyz.kpzip.mcio.block.MCIOBlocks;
 import xyz.kpzip.mcio.item.MCIOItems;
 import xyz.kpzip.mcio.item.component.MCIOComponents;
 import xyz.kpzip.mcio.item.component.WrenchInfoComponent;
@@ -60,10 +62,23 @@ public abstract class PerhipheralBlock<T extends Enum<T> & StringRepresentable> 
 	public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
 		return this.defaultBlockState();
 	}
-	
+
 	@Override
 	protected MapCodec<? extends BaseEntityBlock> codec() {
 		return simpleCodec(super_constructor);
+	}
+	
+	public abstract boolean canSelect(BlockPos pos, BlockState state, Level level, Player player, WrenchInfoComponent component, ItemStack wrenchStack);
+	
+	public static boolean wrenchSelectionHelper(BlockPos pos, BlockState state, Level level, Player player, 
+			WrenchInfoComponent component, ItemStack wrenchStack, int inputMax, int outputMax, int biDirectMax) {
+		List<BlockState> states = component.getSelectedBlocks().stream().map((pos2) -> level.getBlockState(pos2)).toList();
+		long inputs = states.stream().filter((state2) -> state2.getBlock() == MCIOBlocks.PERHIPHERAL_INPUT).count();
+		if (state.getBlock() == MCIOBlocks.PERHIPHERAL_INPUT) {
+			return inputs < inputMax;
+		}
+		return false;
+		
 	}
 
 }

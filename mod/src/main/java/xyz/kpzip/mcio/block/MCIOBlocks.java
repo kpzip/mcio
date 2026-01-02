@@ -14,7 +14,9 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import xyz.kpzip.mcio.MCIO;
 import xyz.kpzip.mcio.block.perhipheral.I2C;
+import xyz.kpzip.mcio.block.perhipheral.mutiblock.PerhipheralBiDirectional;
 import xyz.kpzip.mcio.block.perhipheral.mutiblock.PerhipheralInput;
+import xyz.kpzip.mcio.block.perhipheral.mutiblock.PerhipheralOutput;
 
 /**
  * 
@@ -28,8 +30,11 @@ public class MCIOBlocks {
 	public static final Block MCU_INTERFACE_BLOCK = register("mcu_interface", MCUInterface::new, BlockBehaviour.Properties.of().strength(4.0f));
 	
 	// Perhipheral building blocks
-	public static final Block PERHIPHERAL_INPUT = register("perhipheral_input", PerhipheralInput::new, BlockBehaviour.Properties.of().strength(4.0f))
-;	
+	public static final Block PERHIPHERAL_INPUT = register("perhipheral_input", PerhipheralInput::new, BlockBehaviour.Properties.of().strength(4.0f));
+	public static final Block PERHIPHERAL_OUTPUT = register("perhipheral_output", PerhipheralOutput::new, BlockBehaviour.Properties.of().strength(4.0f));
+	public static final Block PERHIPHERAL_BIDIRECTIONAL = register("perhipheral_bidirect", PerhipheralBiDirectional::new, BlockBehaviour.Properties.of().strength(4.0f));
+	
+	
 	// Perhipherals
 	public static final Block I2C_PERHIPHERAL_BLOCK = register("i2c", I2C::new, BlockBehaviour.Properties.of().strength(4.0f));
 	

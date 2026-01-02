@@ -7,7 +7,9 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import xyz.kpzip.mcio.blockentity.MCIOBlockEntities;
 import xyz.kpzip.mcio.blockentity.perhipheral.I2CBlockEntity;
+import xyz.kpzip.mcio.blockentity.perhipheral.component.PerhipheralBiDirectionalComponentBlockEntity;
 import xyz.kpzip.mcio.blockentity.perhipheral.component.PerhipheralInputComponentBlockEntity;
+import xyz.kpzip.mcio.blockentity.perhipheral.component.PerhipheralOutputComponentBlockEntity;
 import xyz.kpzip.mcio.blockentity.renderer.PerhipheralComponentRenderer;
 import xyz.kpzip.mcio.blockentity.renderer.model.MCIOModelLayers;
 import xyz.kpzip.mcio.screen.GPIOScreen;
@@ -27,6 +29,8 @@ public class MCIOClient implements ClientModInitializer {
 		
 		// Block Entity Renderers
 		BlockEntityRenderers.register(MCIOBlockEntities.PERHIPHERAL_INPUT_BLOCK_ENTITY, PerhipheralComponentRenderer<PerhipheralInputComponentBlockEntity>::new);
+		BlockEntityRenderers.register(MCIOBlockEntities.PERHIPHERAL_OUTPUT_BLOCK_ENTITY, PerhipheralComponentRenderer<PerhipheralOutputComponentBlockEntity>::new);
+		BlockEntityRenderers.register(MCIOBlockEntities.PERHIPHERAL_BIDIRECTIONAL_BLOCK_ENTITY, PerhipheralComponentRenderer<PerhipheralBiDirectionalComponentBlockEntity>::new);
 		BlockEntityRenderers.register(MCIOBlockEntities.I2C_PERHIPHERAL_BLOCK_ENTITY, PerhipheralComponentRenderer<I2CBlockEntity>::new);
 		
 		MCIOModelLayers.init();
