@@ -1,6 +1,6 @@
 {
 	"parent": "block/cube_all",
 	"textures": { 
-		"all": "mcio:block/i2c_controller_single"
+		"all": "mcio:block/i2c_scl"
 	}
 }

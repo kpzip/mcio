@@ -6,16 +6,23 @@ import com.google.common.collect.ImmutableMap;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import xyz.kpzip.mcio.block.MCIOBlocks;
 import xyz.kpzip.mcio.block.peripheral.mutiblock.PeripheralMultiblockComponent;
 import xyz.kpzip.mcio.block.peripheral.state.I2CBlockStates;
 import xyz.kpzip.mcio.block.peripheral.state.PeripheralType;
 import xyz.kpzip.mcio.blockentity.peripheral.I2CBlockEntity;
+import xyz.kpzip.mcio.item.component.WrenchState;
 
 public class I2C extends PeripheralBlock {
 	
@@ -47,6 +54,22 @@ public class I2C extends PeripheralBlock {
 	@Override
 	public Map<PeripheralMultiblockComponent, PeripheralType[]> getSelectableStates() {
 		return SELECTABLE_STATES;
+	}
+	
+	@Override
+	protected void createMultiblock(BlockState state, Level level, BlockPos controllerPos, Player player, InteractionHand hand,
+			BlockHitResult hitResult, ItemStack wrenchStack, WrenchState wrench, BlockEntity be) {
+		I2CBlockEntity controllerBlockEntity = (I2CBlockEntity) be;
+		WrenchState.SelectedBlockData sdaData = wrench.dataForType(I2CBlockStates.SDA).iterator().next();
+		WrenchState.SelectedBlockData sclData = wrench.dataForType(I2CBlockStates.SCL).iterator().next();
+		level.setBlock(sdaData.pos(), this.getStateForPlacement(new BlockPlaceContext(level, player, hand, wrenchStack, hitResult)).setValue(PART, I2CBlockStates.SDA), UPDATE_ALL_IMMEDIATE);
+		level.setBlock(sclData.pos(), this.getStateForPlacement(new BlockPlaceContext(level, player, hand, wrenchStack, hitResult)).setValue(PART, I2CBlockStates.SCL), UPDATE_ALL_IMMEDIATE);
+		level.setBlock(controllerPos, state.setValue(PART, I2CBlockStates.CONTROLLER), UPDATE_ALL_IMMEDIATE);
+		I2CBlockEntity sdaBlockEntity = (I2CBlockEntity) level.getBlockEntity(sdaData.pos());
+		I2CBlockEntity sclBlockEntity = (I2CBlockEntity) level.getBlockEntity(sclData.pos());
+		controllerBlockEntity.initializeMultiblock(controllerPos, sdaData.pos(), sclData.pos());
+		sdaBlockEntity.initializeMultiblock(controllerPos, sdaData.pos(), sclData.pos());
+		sclBlockEntity.initializeMultiblock(controllerPos, sdaData.pos(), sclData.pos());
 	}
 
 }

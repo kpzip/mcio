@@ -13,7 +13,7 @@ import xyz.kpzip.mcio.item.component.WrenchState;
 
 public class MCIOItems {
 	
-	public static final Item WRENCH = register("wrench", Wrench::new, new Item.Properties().stacksTo(1).component(MCIOComponents.WRENCH_DATA, new WrenchState()));
+	public static final Item WRENCH = register("wrench", WrenchItem::new, new Item.Properties().stacksTo(1).component(MCIOComponents.WRENCH_DATA, new WrenchState()));
 	
 	
 	private static Item register(String path, Function<Item.Properties, Item> factory, Item.Properties settings) {

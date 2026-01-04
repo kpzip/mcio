@@ -1,5 +1,8 @@
 {
 	"variants": { 
-		"part=single": { "model": "mcio:block/i2c_single" }
+		"part=single": { "model": "mcio:block/i2c_single" },
+		"part=controller": { "model": "mcio:block/i2c_controller" },
+		"part=sda": { "model": "mcio:block/i2c_sda" },
+		"part=scl": { "model": "mcio:block/i2c_scl" }
 	} 
 }

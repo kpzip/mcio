@@ -9,10 +9,10 @@ import net.minecraft.world.level.Level;
 import xyz.kpzip.mcio.item.component.MCIOComponents;
 
 // Yet another mod that adds a wrench. At least this one has some snazzy textures.
-public class Wrench extends Item {
+public class WrenchItem extends Item {
 	
 	
-	public Wrench(Properties properties) {
+	public WrenchItem(Properties properties) {
 		super(properties);
 	}
 	

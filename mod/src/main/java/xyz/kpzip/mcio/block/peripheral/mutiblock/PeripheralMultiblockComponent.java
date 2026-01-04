@@ -34,7 +34,7 @@ public abstract class PeripheralMultiblockComponent extends BaseEntityBlock {
 					controllerState = component.getSelectedController().state();
 				}
 				if (component != null && component.isSelected(blockPos)) {
-					itemStack.set(MCIOComponents.WRENCH_DATA, new WrenchState(new ImmutableList.Builder<WrenchState.SelectedBlockData>().addAll(component.getSelectedBlocks().stream().filter((pos2) -> !pos2.pos().equals(blockPos)).iterator()).build(), component.getSelectedController()));
+					itemStack.set(MCIOComponents.WRENCH_DATA, component.remove(blockPos));
 					return InteractionResult.SUCCESS_SERVER;
 				}
 				else if (component != null && component.canSelect(blockPos) && controllerState != null && controllerState.getBlock() instanceof PeripheralBlock b && b.canSelect(blockPos, blockState, level, player, component, itemStack)) {

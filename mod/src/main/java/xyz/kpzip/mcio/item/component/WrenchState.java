@@ -1,6 +1,9 @@
 package xyz.kpzip.mcio.item.component;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -105,7 +108,6 @@ public class WrenchState {
 		return inputs_needed == 0 && outputs_needed == 0 && bidirects_needed == 0;
 	}
 	
-	@Nullable
 	public PeripheralType nextAvailable(PeripheralType[] types) {
 		int idx = 0;
 		if (types.length == 0) {
@@ -124,6 +126,39 @@ public class WrenchState {
 		}
 		MCIO.LOGGER.info("bruh2");
 		return UnitState.INSTANCE;
+	}
+	
+	public WrenchState remove(BlockPos pos) {
+		return removeMultiple(pos);
+	}
+	
+	@Nullable
+	public WrenchState removeMultiple(BlockPos... positions) {
+		if (this.selectedController == null || !Arrays.stream(positions).anyMatch(p -> !Objects.equals(p, this.selectedController.pos))) return null;
+		List<SelectedBlockData> newSelection = new ArrayList<SelectedBlockData>(this.selectedBlocks.size() - positions.length);
+		// Add all blocks adjacent to the controller
+		for (SelectedBlockData selected : this.selectedBlocks) {
+			if (this.selectedController.pos().distManhattan(selected.pos) == 1 && Arrays.stream(positions).allMatch(p -> !Objects.equals(p, selected.pos()))) {
+				newSelection.add(selected);
+			}
+		}
+		
+		boolean modified;
+		
+		do {
+			modified = false;
+			for (SelectedBlockData selected : this.selectedBlocks) {
+				if (!newSelection.stream().allMatch((s) -> s.pos.distManhattan(selected.pos) != 1) && newSelection.stream().allMatch((s) -> s.pos.distManhattan(selected.pos) != 0) && Arrays.stream(positions).allMatch(p -> !Objects.equals(p, selected.pos()))) {
+					newSelection.add(selected);
+					modified = true;
+				}
+			}
+		} while (modified);
+		return new WrenchState(ImmutableList.copyOf(newSelection), this.selectedController);
+	}
+	
+	public Iterable<SelectedBlockData> dataForType(PeripheralType type) {
+		return () -> this.selectedBlocks.stream().filter((data) -> data.selectedType == type).iterator();
 	}
 	
 	public static record SelectedBlockData(BlockPos pos, BlockState state, PeripheralType selectedType) {
