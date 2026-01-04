@@ -1,5 +1,7 @@
 package xyz.kpzip.mcio;
 
+import java.util.stream.Stream;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -7,6 +9,8 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.MinecraftServer;
 import xyz.kpzip.mcio.block.MCIOBlocks;
+import xyz.kpzip.mcio.block.peripheral.state.I2CBlockStates;
+import xyz.kpzip.mcio.block.peripheral.state.PeripheralTypes;
 import xyz.kpzip.mcio.blockentity.MCIOBlockEntities;
 import xyz.kpzip.mcio.communications.SerialCommunication;
 import xyz.kpzip.mcio.item.MCIOItems;
@@ -30,6 +34,7 @@ public class MCIO implements ModInitializer, ServerLifecycleEvents.ServerStopped
 		// Proceed with mild caution.
 
 		LOGGER.info("MCIO Loaded.");
+		LOGGER.info("I2C States: " + Stream.of(I2CBlockStates.values()).map(value -> value.getSerializedName()).reduce("", (s1, s2) -> s1 + s2));
 		
 		// Static load a bunch of classes
 		MCIOBlocks.init();
@@ -37,6 +42,7 @@ public class MCIO implements ModInitializer, ServerLifecycleEvents.ServerStopped
 		MCIOBlockEntities.init();
 		MCIOScreens.init();
 		MCIOComponents.init();
+		PeripheralTypes.init();
 		
 		ServerLifecycleEvents.SERVER_STOPPED.register(this);
 		

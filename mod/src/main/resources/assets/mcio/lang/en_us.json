@@ -5,5 +5,19 @@
 	"block.mcio.perhipheral_output": "Perhipheral Output Connector",
 	"block.mcio.perhipheral_bidirect": "Perhipheral Bi-Directional Connector",
 	"block.mcio.i2c": "I^2C Interface",
-	"item.mcio.wrench": "Debug Probe"
+	
+	"item.mcio.wrench": "Debug Probe",
+	
+	"gui.mcio.perhipheral_selector.i2c": "I^2C Interface",
+	"gui.mcio.perhipheral_selector.incomplete": "Missing:",
+	"gui.mcio.perhipheral_selector.complete": "Multiblock Ready.",
+	"gui.mcio.perhipheral_selector.missing_input": "%s Input Connector",
+	"gui.mcio.perhipheral_selector.missing_input_plural": "%s Input Connectors",
+	"gui.mcio.perhipheral_selector.missing_output": "%s Output Connector",
+	"gui.mcio.perhipheral_selector.missing_output_plural": "%s Ouput Connectors",
+	"gui.mcio.perhipheral_selector.missing_bidirect": "%s Bi-Directional Connector",
+	"gui.mcio.perhipheral_selector.missing_bidirect_plural": "%s Bi-Directional Connectors",
+	"gui.mcio.perhipheral_selector.role": "Connected To:",
+	"gui.mcio.perhipheral_selector.sda": "SDA",
+	"gui.mcio.perhipheral_selector.scl": "SCL"
 }
