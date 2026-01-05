@@ -9,7 +9,7 @@ public class PeripheralBiDirectionalComponentBlockEntity extends PeripheralCompo
 
 	public PeripheralBiDirectionalComponentBlockEntity(BlockPos blockPos,
 			BlockState blockState) {
-		super(MCIOBlockEntities.PERHIPHERAL_BIDIRECTIONAL_BLOCK_ENTITY, blockPos, blockState);
+		super(MCIOBlockEntities.PERIPHERAL_BIDIRECTIONAL_BLOCK_ENTITY, blockPos, blockState);
 	}
 	
 	@Override

@@ -5,16 +5,16 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.state.BlockState;
 import xyz.kpzip.mcio.blockentity.MCIOBlockEntities;
 
-public class PeripheralInputComponentBlockEntity extends PeripheralComponentBlockEntity {
+public class PeripheralFillerComponentBlockEntity extends PeripheralComponentBlockEntity {
 
-	public PeripheralInputComponentBlockEntity(BlockPos blockPos,
+	public PeripheralFillerComponentBlockEntity(BlockPos blockPos,
 			BlockState blockState) {
-		super(MCIOBlockEntities.PERIPHERAL_INPUT_BLOCK_ENTITY, blockPos, blockState);
+		super(MCIOBlockEntities.PERIPHERAL_FILLER_BLOCK_ENTITY, blockPos, blockState);
 	}
 	
 	@Override
 	public int getOutlineColor() {
-		return DyeColor.RED.getTextColor();
+		return DyeColor.LIGHT_GRAY.getTextColor();
 	}
 
 }

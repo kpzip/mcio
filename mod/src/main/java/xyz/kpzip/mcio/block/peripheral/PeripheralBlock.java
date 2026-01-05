@@ -44,7 +44,7 @@ public abstract class PeripheralBlock extends BaseEntityBlock {
 		if (itemStack.getItem() == MCIOItems.WRENCH) {
 			if (!level.isClientSide()) {
 				WrenchState component = itemStack.get(MCIOComponents.WRENCH_DATA);
-				if ((component != null && component.canSelectController(blockPos)) || component == null) {
+				if (this.isSelectable(blockState) && ((component != null && component.canSelectController(blockPos)) || component == null)) {
 					itemStack.set(MCIOComponents.WRENCH_DATA, new WrenchState(blockPos, blockState));
 					return InteractionResult.SUCCESS_SERVER;
 				}
@@ -79,7 +79,7 @@ public abstract class PeripheralBlock extends BaseEntityBlock {
 	}
 	
 	public int maxSelectable(BlockPos pos, BlockState state, Block block) {
-		PeripheralType[] types = this.getSelectableStates().get(block);
+		PeripheralType[] types = this.getSelectablePeripheralComponentStates().get(block);
 		return types == null ? 0 : types.length;
 	}
 	
@@ -87,29 +87,34 @@ public abstract class PeripheralBlock extends BaseEntityBlock {
 	
 	public boolean canSelect(BlockPos pos, BlockState state, Level level, Player player, WrenchState component, ItemStack wrenchStack) {
 		return wrenchSelectionHelper(pos, state, level, player, component, wrenchStack, 
-				this.maxSelectable(pos, state, MCIOBlocks.PERHIPHERAL_INPUT), 
-				this.maxSelectable(pos, state, MCIOBlocks.PERHIPHERAL_OUTPUT), 
-				this.maxSelectable(pos, state, MCIOBlocks.PERHIPHERAL_BIDIRECTIONAL));
+				this.maxSelectable(pos, state, MCIOBlocks.PERIPHERAL_INPUT), 
+				this.maxSelectable(pos, state, MCIOBlocks.PERIPHERAL_OUTPUT), 
+				this.maxSelectable(pos, state, MCIOBlocks.PERIPHERAL_BIDIRECTIONAL));
 	}
 	
-	public static boolean wrenchSelectionHelper(BlockPos pos, BlockState state, Level level, Player player, 
+	private static boolean wrenchSelectionHelper(BlockPos pos, BlockState state, Level level, Player player, 
 			WrenchState component, ItemStack wrenchStack, int inputMax, int outputMax, int biDirectMax) {
-		long inputs = component.numSelected(MCIOBlocks.PERHIPHERAL_INPUT);
-		long outputs = component.numSelected(MCIOBlocks.PERHIPHERAL_OUTPUT);
-		long bidirects = component.numSelected(MCIOBlocks.PERHIPHERAL_BIDIRECTIONAL);
-		if (state.getBlock() == MCIOBlocks.PERHIPHERAL_INPUT) {
+		long inputs = component.numSelected(MCIOBlocks.PERIPHERAL_INPUT);
+		long outputs = component.numSelected(MCIOBlocks.PERIPHERAL_OUTPUT);
+		long bidirects = component.numSelected(MCIOBlocks.PERIPHERAL_BIDIRECTIONAL);
+		if (state.getBlock() == MCIOBlocks.PERIPHERAL_INPUT) {
 			return inputs < inputMax;
 		}
-		if (state.getBlock() == MCIOBlocks.PERHIPHERAL_OUTPUT) {
+		if (state.getBlock() == MCIOBlocks.PERIPHERAL_OUTPUT) {
 			return outputs < outputMax;
 		}
-		if (state.getBlock() == MCIOBlocks.PERHIPHERAL_BIDIRECTIONAL) {
+		if (state.getBlock() == MCIOBlocks.PERIPHERAL_BIDIRECTIONAL) {
 			return bidirects < biDirectMax;
+		}
+		if (state.getBlock() == MCIOBlocks.PERIPHERAL_FILLER) {
+			return true;
 		}
 		return false;
 		
 	}
 	
-	public abstract Map<? extends Block, PeripheralType[]> getSelectableStates();
+	public abstract Map<? extends Block, PeripheralType[]> getSelectablePeripheralComponentStates();
+	
+	public abstract boolean isSelectable(BlockState state);
 
 }

@@ -1,0 +1,5 @@
+{
+	"variants": { 
+		"": { "model": "mcio:block/peripheral_input" }
+	} 
+}

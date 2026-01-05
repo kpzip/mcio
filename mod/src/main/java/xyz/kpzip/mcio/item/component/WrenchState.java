@@ -18,7 +18,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import xyz.kpzip.mcio.MCIO;
 import xyz.kpzip.mcio.block.MCIOBlocks;
 import xyz.kpzip.mcio.block.peripheral.PeripheralBlock;
 import xyz.kpzip.mcio.block.peripheral.state.PeripheralType;
@@ -102,29 +101,31 @@ public class WrenchState {
 		BlockPos pos = this.selectedController.pos();
 		BlockState state = this.selectedController.state();
 		PeripheralBlock block = (PeripheralBlock) state.getBlock();
-		long inputs_needed = block.maxSelectable(pos, state, MCIOBlocks.PERHIPHERAL_INPUT) - this.numSelected(MCIOBlocks.PERHIPHERAL_INPUT);
-		long outputs_needed = block.maxSelectable(pos, state, MCIOBlocks.PERHIPHERAL_OUTPUT) - this.numSelected(MCIOBlocks.PERHIPHERAL_OUTPUT);
-		long bidirects_needed = block.maxSelectable(pos, state, MCIOBlocks.PERHIPHERAL_BIDIRECTIONAL) - this.numSelected(MCIOBlocks.PERHIPHERAL_BIDIRECTIONAL);
+		long inputs_needed = block.maxSelectable(pos, state, MCIOBlocks.PERIPHERAL_INPUT) - this.numSelected(MCIOBlocks.PERIPHERAL_INPUT);
+		long outputs_needed = block.maxSelectable(pos, state, MCIOBlocks.PERIPHERAL_OUTPUT) - this.numSelected(MCIOBlocks.PERIPHERAL_OUTPUT);
+		long bidirects_needed = block.maxSelectable(pos, state, MCIOBlocks.PERIPHERAL_BIDIRECTIONAL) - this.numSelected(MCIOBlocks.PERIPHERAL_BIDIRECTIONAL);
 		return inputs_needed == 0 && outputs_needed == 0 && bidirects_needed == 0;
 	}
 	
 	public PeripheralType nextAvailable(PeripheralType[] types) {
 		int idx = 0;
-		if (types.length == 0) {
-			MCIO.LOGGER.info("bruh1");
+		if (types == null || types.length == 0) {
 			return UnitState.INSTANCE;
 		}
+		
 		for (int i = 0; i < this.selectedBlocks.size() && idx < types.length; i++) {
 			if (this.selectedBlocks.get(i).selectedType() == types[idx]) {
 				idx++;
 				continue;
 			}
+			else if (this.selectedBlocks.get(i).selectedType() == UnitState.INSTANCE) {
+				continue;
+			}
 			return types[idx];
 		}
-		if (types.length > this.selectedBlocks.size()) {
+		if (idx < types.length) {
 			return types[idx];
 		}
-		MCIO.LOGGER.info("bruh2");
 		return UnitState.INSTANCE;
 	}
 	

@@ -1,6 +1,6 @@
 {
 	"model": {
 		"type": "minecraft:model",
-		"model": "mcio:block/perhipheral_output"
+		"model": "mcio:block/peripheral_bidirect"
 	}
 }

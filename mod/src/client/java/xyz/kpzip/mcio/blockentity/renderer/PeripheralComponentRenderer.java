@@ -34,8 +34,10 @@ public class PeripheralComponentRenderer<T extends PeripheralComponentBlockEntit
 	@Override
 	protected void getText(List<Component> lines, WrenchState component, PeripheralComponentRenderState blockEntityRenderState) {
 		WrenchState.SelectedBlockData selectedBlockData = component.getSelectedBlocks().stream().filter((data) -> Objects.equals(data.pos(), blockEntityRenderState.blockPos)).findFirst().get();
-		lines.add(Component.translatable("gui.mcio.perhipheral_selector.role"));
-		lines.add(selectedBlockData.selectedType().getName());
+		Component name = selectedBlockData.selectedType().getName();
+		if (name == null) return;
+		lines.add(Component.translatable("gui.mcio.peripheral_selector.role"));
+		lines.add(name);
 	}
 
 }

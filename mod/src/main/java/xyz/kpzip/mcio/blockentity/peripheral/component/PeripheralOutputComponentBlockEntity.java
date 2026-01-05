@@ -9,7 +9,7 @@ public class PeripheralOutputComponentBlockEntity extends PeripheralComponentBlo
 
 	public PeripheralOutputComponentBlockEntity(BlockPos blockPos,
 			BlockState blockState) {
-		super(MCIOBlockEntities.PERHIPHERAL_OUTPUT_BLOCK_ENTITY, blockPos, blockState);
+		super(MCIOBlockEntities.PERIPHERAL_OUTPUT_BLOCK_ENTITY, blockPos, blockState);
 	}
 	
 	@Override

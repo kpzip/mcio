@@ -29,21 +29,21 @@ public class PeripheralControllerRenderer<T extends PeripheralBlockEntity> exten
 		BlockState s = component.getSelectedController().state();
 		PeripheralBlock block = (PeripheralBlock) s.getBlock();
 		BlockPos pos = blockEntityRenderState.blockPos;
-		long inputs_needed = block.maxSelectable(pos, s, MCIOBlocks.PERHIPHERAL_INPUT) - component.numSelected(MCIOBlocks.PERHIPHERAL_INPUT);
-		long outputs_needed = block.maxSelectable(pos, s, MCIOBlocks.PERHIPHERAL_OUTPUT) - component.numSelected(MCIOBlocks.PERHIPHERAL_OUTPUT);
-		long bidirects_needed = block.maxSelectable(pos, s, MCIOBlocks.PERHIPHERAL_BIDIRECTIONAL) - component.numSelected(MCIOBlocks.PERHIPHERAL_BIDIRECTIONAL);
+		long inputs_needed = block.maxSelectable(pos, s, MCIOBlocks.PERIPHERAL_INPUT) - component.numSelected(MCIOBlocks.PERIPHERAL_INPUT);
+		long outputs_needed = block.maxSelectable(pos, s, MCIOBlocks.PERIPHERAL_OUTPUT) - component.numSelected(MCIOBlocks.PERIPHERAL_OUTPUT);
+		long bidirects_needed = block.maxSelectable(pos, s, MCIOBlocks.PERIPHERAL_BIDIRECTIONAL) - component.numSelected(MCIOBlocks.PERIPHERAL_BIDIRECTIONAL);
 		boolean complete = component.isComplete();
 		lines.add(block.getBlockPerhipheralName());
-		lines.add(complete ? Component.translatable("gui.mcio.perhipheral_selector.complete") : Component.translatable("gui.mcio.perhipheral_selector.incomplete"));
+		lines.add(complete ? Component.translatable("gui.mcio.peripheral_selector.complete") : Component.translatable("gui.mcio.peripheral_selector.incomplete"));
 		
 		if (inputs_needed > 0) {
-			lines.add(Component.translatableEscape("gui.mcio.perhipheral_selector.missing_input", inputs_needed));
+			lines.add(Component.translatableEscape("gui.mcio.peripheral_selector.missing_input", inputs_needed));
 		}
 		if (outputs_needed > 0) {
-			lines.add(Component.translatableEscape("gui.mcio.perhipheral_selector.missing_output", outputs_needed));
+			lines.add(Component.translatableEscape("gui.mcio.peripheral_selector.missing_output", outputs_needed));
 		}
 		if (bidirects_needed > 0) {
-			lines.add(Component.translatableEscape("gui.mcio.perhipheral_selector.missing_bidirect", bidirects_needed));
+			lines.add(Component.translatableEscape("gui.mcio.peripheral_selector.missing_bidirect", bidirects_needed));
 		}
 		
 	}

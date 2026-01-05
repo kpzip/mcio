@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import xyz.kpzip.mcio.MCIO;
 import xyz.kpzip.mcio.block.peripheral.I2C;
 import xyz.kpzip.mcio.block.peripheral.mutiblock.PeripheralBiDirectional;
+import xyz.kpzip.mcio.block.peripheral.mutiblock.PeripheralFiller;
 import xyz.kpzip.mcio.block.peripheral.mutiblock.PeripheralInput;
 import xyz.kpzip.mcio.block.peripheral.mutiblock.PeripheralOutput;
 
@@ -30,13 +31,14 @@ public class MCIOBlocks {
 	public static final Block MCU_INTERFACE_BLOCK = register("mcu_interface", MCUInterface::new, BlockBehaviour.Properties.of().strength(4.0f));
 	
 	// Peripheral building blocks
-	public static final Block PERHIPHERAL_INPUT = register("perhipheral_input", PeripheralInput::new, BlockBehaviour.Properties.of().strength(4.0f));
-	public static final Block PERHIPHERAL_OUTPUT = register("perhipheral_output", PeripheralOutput::new, BlockBehaviour.Properties.of().strength(4.0f));
-	public static final Block PERHIPHERAL_BIDIRECTIONAL = register("perhipheral_bidirect", PeripheralBiDirectional::new, BlockBehaviour.Properties.of().strength(4.0f));
+	public static final Block PERIPHERAL_INPUT = register("peripheral_input", PeripheralInput::new, BlockBehaviour.Properties.of().strength(4.0f));
+	public static final Block PERIPHERAL_OUTPUT = register("peripheral_output", PeripheralOutput::new, BlockBehaviour.Properties.of().strength(4.0f));
+	public static final Block PERIPHERAL_BIDIRECTIONAL = register("peripheral_bidirect", PeripheralBiDirectional::new, BlockBehaviour.Properties.of().strength(4.0f));
+	public static final Block PERIPHERAL_FILLER = register("peripheral_filler", PeripheralFiller::new, BlockBehaviour.Properties.of().strength(4.0f));
 	
 	
 	// Peripherals
-	public static final Block I2C_PERHIPHERAL_BLOCK = register("i2c", I2C::new, BlockBehaviour.Properties.of().strength(4.0f));
+	public static final Block I2C_PERIPHERAL_BLOCK = register("i2c", I2C::new, BlockBehaviour.Properties.of().strength(4.0f));
 	
 	
 	private static Block register(String path, Function<BlockBehaviour.Properties, Block> factory, BlockBehaviour.Properties settings) {

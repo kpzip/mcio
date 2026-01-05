@@ -1,6 +1,6 @@
 {
 	"parent": "block/cube_all",
 	"textures": { 
-		"all": "mcio:block/perhipheral_bidirect"
+		"all": "mcio:block/peripheral_input"
 	}
 }

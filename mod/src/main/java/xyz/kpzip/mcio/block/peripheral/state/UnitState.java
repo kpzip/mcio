@@ -2,6 +2,7 @@ package xyz.kpzip.mcio.block.peripheral.state;
 
 import com.mojang.serialization.MapCodec;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
 
 public enum UnitState implements StringRepresentable, PeripheralType {
@@ -15,6 +16,11 @@ public enum UnitState implements StringRepresentable, PeripheralType {
 	@Override
 	public String getSerializedName() {
 		return "unit";
+	}
+	
+	@Override
+	public Component getName() {
+		return null;
 	}
 
 }

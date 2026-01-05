@@ -8,7 +8,7 @@ import net.minecraft.util.StringRepresentable;
 public interface PeripheralType extends StringRepresentable {
 	
 	public default Component getName() {
-		return Component.translatable("gui.mcio.perhipheral_selector." + this.getSerializedName());
+		return Component.translatable("gui.mcio.peripheral_selector." + this.getSerializedName());
 	}
 	
 	public MapCodec<? extends PeripheralType> getType();

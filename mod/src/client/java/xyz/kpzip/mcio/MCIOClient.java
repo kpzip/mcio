@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import xyz.kpzip.mcio.blockentity.MCIOBlockEntities;
 import xyz.kpzip.mcio.blockentity.peripheral.I2CBlockEntity;
 import xyz.kpzip.mcio.blockentity.peripheral.component.PeripheralBiDirectionalComponentBlockEntity;
+import xyz.kpzip.mcio.blockentity.peripheral.component.PeripheralFillerComponentBlockEntity;
 import xyz.kpzip.mcio.blockentity.peripheral.component.PeripheralInputComponentBlockEntity;
 import xyz.kpzip.mcio.blockentity.peripheral.component.PeripheralOutputComponentBlockEntity;
 import xyz.kpzip.mcio.blockentity.renderer.PeripheralComponentRenderer;
@@ -29,11 +30,12 @@ public class MCIOClient implements ClientModInitializer {
 		MenuScreens.register(MCIOScreens.MCU_INTERFACE_SCREEN_HANDLER, MCUInterfaceScreen::new);
 		
 		// Block Entity Renderers
-		BlockEntityRenderers.register(MCIOBlockEntities.PERHIPHERAL_INPUT_BLOCK_ENTITY, PeripheralComponentRenderer<PeripheralInputComponentBlockEntity>::new);
-		BlockEntityRenderers.register(MCIOBlockEntities.PERHIPHERAL_OUTPUT_BLOCK_ENTITY, PeripheralComponentRenderer<PeripheralOutputComponentBlockEntity>::new);
-		BlockEntityRenderers.register(MCIOBlockEntities.PERHIPHERAL_BIDIRECTIONAL_BLOCK_ENTITY, PeripheralComponentRenderer<PeripheralBiDirectionalComponentBlockEntity>::new);
+		BlockEntityRenderers.register(MCIOBlockEntities.PERIPHERAL_INPUT_BLOCK_ENTITY, PeripheralComponentRenderer<PeripheralInputComponentBlockEntity>::new);
+		BlockEntityRenderers.register(MCIOBlockEntities.PERIPHERAL_OUTPUT_BLOCK_ENTITY, PeripheralComponentRenderer<PeripheralOutputComponentBlockEntity>::new);
+		BlockEntityRenderers.register(MCIOBlockEntities.PERIPHERAL_BIDIRECTIONAL_BLOCK_ENTITY, PeripheralComponentRenderer<PeripheralBiDirectionalComponentBlockEntity>::new);
+		BlockEntityRenderers.register(MCIOBlockEntities.PERIPHERAL_FILLER_BLOCK_ENTITY, PeripheralComponentRenderer<PeripheralFillerComponentBlockEntity>::new);
 		
-		BlockEntityRenderers.register(MCIOBlockEntities.I2C_PERHIPHERAL_BLOCK_ENTITY, PeripheralControllerRenderer<I2CBlockEntity>::new);
+		BlockEntityRenderers.register(MCIOBlockEntities.I2C_PERIPHERAL_BLOCK_ENTITY, PeripheralControllerRenderer<I2CBlockEntity>::new);
 		
 		MCIOModelLayers.init();
 	}
