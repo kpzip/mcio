@@ -23,5 +23,8 @@ public abstract class PeripheralBlockEntity extends PeripheralComponentBlockEnti
 	public int getOutlineColor() {
 		return DyeColor.LIME.getTextColor();
 	}
+	
+	public abstract boolean isMultiblock();
+	
 
 }

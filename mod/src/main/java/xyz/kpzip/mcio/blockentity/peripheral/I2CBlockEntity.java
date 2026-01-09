@@ -72,5 +72,26 @@ public class I2CBlockEntity extends PeripheralBlockEntity {
 		this.sdaPos = valueInput.read("sdaPos", BlockPos.CODEC).orElse(null);
 		this.controllerPos = valueInput.read("controllerPos", BlockPos.CODEC).orElse(null);
 	}
+	
+	public BlockPos getControllerPos() {
+		return controllerPos;
+	}
+
+	public BlockPos getSdaPos() {
+		return sdaPos;
+	}
+
+	public BlockPos getSclPos() {
+		return sclPos;
+	}
+
+	public List<BlockPos> getFillerPositions() {
+		return fillerPositions;
+	}
+	
+	@Override
+	public boolean isMultiblock() {
+		return controllerPos != null;
+	}
 
 }

@@ -13,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -20,8 +21,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import xyz.kpzip.mcio.MCIO;
 import xyz.kpzip.mcio.block.MCIOBlocks;
 import xyz.kpzip.mcio.block.peripheral.state.PeripheralType;
+import xyz.kpzip.mcio.blockentity.peripheral.PeripheralBlockEntity;
 import xyz.kpzip.mcio.item.MCIOItems;
 import xyz.kpzip.mcio.item.component.MCIOComponents;
 import xyz.kpzip.mcio.item.component.WrenchState;
@@ -62,6 +65,8 @@ public abstract class PeripheralBlock extends BaseEntityBlock {
 	
 	protected abstract void createMultiblock(BlockState state, Level level, BlockPos controllerPos, Player player, InteractionHand hand,
 			BlockHitResult hitResult, ItemStack wrenchStack, WrenchState wrench, BlockEntity be);
+	
+	protected abstract void destroyMultiblock(BlockState brokenState, LevelAccessor level, BlockPos brokenPos, BlockEntity be);
 	
 	@Override
 	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
@@ -116,5 +121,24 @@ public abstract class PeripheralBlock extends BaseEntityBlock {
 	public abstract Map<? extends Block, PeripheralType[]> getSelectablePeripheralComponentStates();
 	
 	public abstract boolean isSelectable(BlockState state);
+	
+	@Override
+	public void destroy(LevelAccessor levelAccessor, BlockPos blockPos, BlockState blockState) {
+		MCIO.LOGGER.info("Breaking I2C Block");
+		if (!levelAccessor.isClientSide()) {
+			PeripheralBlockEntity be = (PeripheralBlockEntity) levelAccessor.getBlockEntity(blockPos);
+			if (be.isMultiblock()) {
+				MCIO.LOGGER.info("Breaking I2C Multiblock");
+				this.destroyMultiblock(blockState, levelAccessor, blockPos, be);
+			}
+		}
+	}
+	
+	
+	
+	@Override
+	protected boolean shouldChangedStateKeepBlockEntity(BlockState blockState) {
+		return blockState.getBlock() == this;
+	}
 
 }

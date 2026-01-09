@@ -14,6 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -87,6 +88,31 @@ public class I2C extends PeripheralBlock {
 		controllerBlockEntity.initializeMultiblock(controllerPos, sdaData.pos(), sclData.pos(), fillerPositions);
 		sdaBlockEntity.initializeMultiblock(controllerPos, sdaData.pos(), sclData.pos(), fillerPositions);
 		sclBlockEntity.initializeMultiblock(controllerPos, sdaData.pos(), sclData.pos(), fillerPositions);
+	}
+	
+	@Override
+	protected void destroyMultiblock(BlockState brokenState, LevelAccessor level, BlockPos brokenPos, BlockEntity be) {
+		I2CBlockEntity brokenBlockEntity = (I2CBlockEntity) be;
+		BlockPos controllerPos = brokenBlockEntity.getControllerPos();
+		BlockPos sdaPos = brokenBlockEntity.getSdaPos();
+		BlockPos sclPos = brokenBlockEntity.getSclPos();
+		List<BlockPos> fillerPositions = brokenBlockEntity.getFillerPositions();
+		if (!brokenPos.equals(controllerPos)) {
+			level.setBlock(controllerPos, MCIOBlocks.I2C_PERIPHERAL_BLOCK.defaultBlockState().setValue(PART, I2CBlockStates.SINGLE), UPDATE_ALL_IMMEDIATE);
+			I2CBlockEntity controller = (I2CBlockEntity) level.getBlockEntity(controllerPos);
+			controller.deinitializeMultiblock();
+		}
+		if (!brokenPos.equals(sdaPos)) {
+			level.setBlock(sdaPos, MCIOBlocks.PERIPHERAL_BIDIRECTIONAL.defaultBlockState(), UPDATE_ALL_IMMEDIATE);
+		}
+		if (!brokenPos.equals(sclPos)) {
+			level.setBlock(sclPos, MCIOBlocks.PERIPHERAL_BIDIRECTIONAL.defaultBlockState(), UPDATE_ALL_IMMEDIATE);
+		}
+		for (BlockPos fp : fillerPositions) {
+			if (!brokenPos.equals(fp)) {
+				level.setBlock(fp, MCIOBlocks.PERIPHERAL_FILLER.defaultBlockState(), UPDATE_ALL_IMMEDIATE);
+			}
+		}
 	}
 
 }
