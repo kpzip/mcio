@@ -40,6 +40,9 @@ public class MCIOBlocks {
 	// Peripherals
 	public static final Block I2C_PERIPHERAL_BLOCK = register("i2c", I2C::new, BlockBehaviour.Properties.of().strength(4.0f));
 	
+	// MIDI Noteblock
+	public static final Block MIDI_NOTE_BLOCK = register("midi_note_block", MIDI::new, BlockBehaviour.Properties.of().strength(4.0f));
+	
 	
 	private static Block register(String path, Function<BlockBehaviour.Properties, Block> factory, BlockBehaviour.Properties settings) {
 	    final Identifier identifier = Identifier.tryBuild(MCIO.MOD_ID, path);

@@ -12,6 +12,7 @@ import xyz.kpzip.mcio.block.MCIOBlocks;
 import xyz.kpzip.mcio.block.peripheral.state.I2CBlockStates;
 import xyz.kpzip.mcio.block.peripheral.state.PeripheralTypes;
 import xyz.kpzip.mcio.blockentity.MCIOBlockEntities;
+import xyz.kpzip.mcio.communications.MIDICommunication;
 import xyz.kpzip.mcio.communications.SerialCommunication;
 import xyz.kpzip.mcio.item.MCIOItems;
 import xyz.kpzip.mcio.item.component.MCIOComponents;
@@ -44,6 +45,8 @@ public class MCIO implements ModInitializer, ServerLifecycleEvents.ServerStopped
 		MCIOComponents.init();
 		PeripheralTypes.init();
 		
+		MIDICommunication.init();
+		
 		ServerLifecycleEvents.SERVER_STOPPED.register(this);
 		
 		// TODO should only happen if the block is opened
@@ -53,7 +56,7 @@ public class MCIO implements ModInitializer, ServerLifecycleEvents.ServerStopped
 
 	@Override
 	public void onServerStopped(MinecraftServer server) {
-		
+		MIDICommunication.deinit();
 		SerialCommunication.close();
 		
 	}

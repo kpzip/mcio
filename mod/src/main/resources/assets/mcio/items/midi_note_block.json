@@ -1,0 +1,6 @@
+{
+	"model": {
+		"type": "minecraft:model",
+		"model": "mcio:block/midi_note_block"
+	}
+}

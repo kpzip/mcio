@@ -6,6 +6,7 @@
 	"block.mcio.peripheral_bidirect": "Peripheral Bi-Directional Connector",
 	"block.mcio.peripheral_filler": "Peripheral Filler Block",
 	"block.mcio.i2c": "I^2C Interface",
+	"block.mcio.midi_note_block": "MIDI Note Block",
 	
 	"item.mcio.wrench": "Debug Probe",
 	
