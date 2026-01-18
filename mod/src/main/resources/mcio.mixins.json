@@ -3,7 +3,8 @@
 	"package": "xyz.kpzip.mcio.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+		"ExampleMixin",
+		"TNTMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
