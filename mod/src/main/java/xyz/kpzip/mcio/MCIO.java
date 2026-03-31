@@ -6,12 +6,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.MinecraftServer;
 import xyz.kpzip.mcio.block.MCIOBlocks;
 import xyz.kpzip.mcio.block.peripheral.state.I2CBlockStates;
 import xyz.kpzip.mcio.block.peripheral.state.PeripheralTypes;
 import xyz.kpzip.mcio.blockentity.MCIOBlockEntities;
+import xyz.kpzip.mcio.command.MCIOCommands;
 import xyz.kpzip.mcio.communications.MIDICommunication;
 import xyz.kpzip.mcio.communications.SerialCommunication;
 import xyz.kpzip.mcio.item.MCIOItems;
@@ -48,6 +50,8 @@ public class MCIO implements ModInitializer, ServerLifecycleEvents.ServerStopped
 		MIDICommunication.init();
 		
 		ServerLifecycleEvents.SERVER_STOPPED.register(this);
+		
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, env) -> MCIOCommands.init(dispatcher, registryAccess, env));
 		
 		// TODO should only happen if the block is opened
 		SerialCommunication.init();

@@ -21,5 +21,18 @@
 	"gui.mcio.peripheral_selector.missing_bidirect_plural": "%s Bi-Directional Connectors",
 	"gui.mcio.peripheral_selector.role": "Connected To:",
 	"gui.mcio.peripheral_selector.sda": "SDA",
-	"gui.mcio.peripheral_selector.scl": "SCL"
+	"gui.mcio.peripheral_selector.scl": "SCL",
+	
+	"commands.mcio.midi.list": "Device #%1$s: %2$s",
+	"commands.mcio.midi.set.failure.oob": "Device number must be between 0 and %1$s but got '%2$s'.",
+	"commands.mcio.midi.set.success": "Successfully changed MIDI device to '%1$s'.",
+	"commands.mcio.midi.get.success": "Current MIDI device is '%1$s' (#%2$s).",
+	"commands.mcio.midi.get.failure": "No MIDI device selected.",
+	"commands.mcio.midi.info.success.l1": "Info for MIDI device '%1$s':",
+	"commands.mcio.midi.info.success.l2": "Device Description: '%1$s'",
+	"commands.mcio.midi.info.success.l3": "Device Vendor: '%1$s'",
+	"commands.mcio.midi.info.success.l4": "Device Version: '%1$s'",
+	"commands.mcio.midi.info.failure": "No MIDI device selected.",
+	"commands.mcio.midi.disable.failure": "MIDI communication is already disabled.",
+	"commands.mcio.midi.disable.success": "Successfully disabled MIDI Communication."
 }

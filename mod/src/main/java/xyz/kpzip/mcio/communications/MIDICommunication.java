@@ -1,7 +1,5 @@
 package xyz.kpzip.mcio.communications;
 
-import java.util.Scanner;
-
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiDevice;
 import javax.sound.midi.MidiSystem;
@@ -20,37 +18,79 @@ public class MIDICommunication {
 		return p + 42;
 	}
 	
+	public static boolean isDisabled() {
+		return currentOutputDevice == null;
+	}
+	
+	public static void disable() {
+		if (currentOutputDevice != null) {
+			currentOutputDevice.close();
+		}
+		currentOutputDevice = null;
+	}
+	
+	public static void setCurrentOutputDevice(MidiDevice.Info info) {
+		if (info == null) {
+			disable();
+		}
+		try {
+			MidiDevice device = MidiSystem.getMidiDevice(info);
+			if (currentOutputDevice != null) {
+				currentOutputDevice.close();
+			}
+			if (!device.isOpen()) {
+				device.open();
+			}
+			currentOutputDevice = device;
+		} catch (MidiUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+	}
+	
+	public static MidiDevice.Info getCurrentOutputDevice() {
+		if (currentOutputDevice == null) {
+			return null;
+		}
+		return currentOutputDevice.getDeviceInfo();
+	}
+	
+	public static MidiDevice.Info[] listOutputDevices() {
+		 return MidiSystem.getMidiDeviceInfo();
+	}
+	
 	public static void init() {
 
-        try {
-            MidiDevice.Info[] midiDeviceInfo = MidiSystem.getMidiDeviceInfo();
-
-            for (int i = 0; i < midiDeviceInfo.length; i++) {
-            	MidiDevice.Info info = midiDeviceInfo[i];
-                System.out.println("Available device #" + i + ": " + info.getName());
-            }
-            
-            Scanner input = new Scanner(System.in);
-            int choice = input.nextInt();
-            
-            if (midiDeviceInfo.length == 0) {
-            	return;
-            }
-            
-            currentOutputDevice = MidiSystem.getMidiDevice(midiDeviceInfo[choice]);
-
-            if (currentOutputDevice == null) {
-                System.out.println("MIDI device \"" + currentOutputDevice.getDeviceInfo().getName() + "\" not found. Using default receiver.");
-            }
-
-            if (!currentOutputDevice.isOpen()) {
-            	currentOutputDevice.open();
-                System.out.println("Opened device: " + currentOutputDevice.getDeviceInfo().getName());
-            }
-
-        } catch (MidiUnavailableException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            MidiDevice.Info[] midiDeviceInfo = MidiSystem.getMidiDeviceInfo();
+//
+//            for (int i = 0; i < midiDeviceInfo.length; i++) {
+//            	MidiDevice.Info info = midiDeviceInfo[i];
+//                System.out.println("Available device #" + i + ": " + info.getName());
+//            }
+//            
+//            Scanner input = new Scanner(System.in);
+//            int choice = input.nextInt();
+//            
+//            if (midiDeviceInfo.length == 0) {
+//            	return;
+//            }
+//            
+//            currentOutputDevice = MidiSystem.getMidiDevice(midiDeviceInfo[choice]);
+//
+//            if (currentOutputDevice == null) {
+//                System.out.println("MIDI device \"" + currentOutputDevice.getDeviceInfo().getName() + "\" not found. Using default receiver.");
+//            }
+//
+//            if (!currentOutputDevice.isOpen()) {
+//            	currentOutputDevice.open();
+//                System.out.println("Opened device: " + currentOutputDevice.getDeviceInfo().getName());
+//            }
+//
+//        } catch (MidiUnavailableException e) {
+//            e.printStackTrace();
+//        }
 	}
 	
 	private static Receiver getReceiver() throws MidiUnavailableException {
